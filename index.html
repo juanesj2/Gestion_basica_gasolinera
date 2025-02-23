@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>REDCOM</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body class="bg-light">
+    <div class="container mt-5">
+        <div class="card p-4 shadow-sm">
+            <h2 class="text-center">Elige el tipo de combustible y cantidad</h2>
+            <form id="FormularioRepostar" class="mt-3">
+                <div class="mb-3">
+                    <label class="form-label">Tipo de combustible:</label>
+                    <select id="tipo" name="tipo" class="form-select">
+                        <option value="Gasolina 95">Gasolina 95</option>
+                        <option value="Gasolina 98">Gasolina 98</option>
+                        <option value="Diesel">Diesel Normal</option>
+                        <option value="Diesel premium">Diesel Premium</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Número de surtidor:</label>
+                    <input type="number" id="surtidor" name="surtidor" class="form-control" min="1" max="100" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Litros a repostar:</label>
+                    <input type="number" id="litros" name="litros" class="form-control" min="1" max="100" required>
+                </div>
+                <button type="submit" class="btn btn-primary w-100">Enviar</button>
+            </form>
+        </div>
+
+        <div class="card p-4 shadow-sm mt-4">
+            <h2 class="text-center">Dar de alta un nuevo surtidor</h2>
+            <form id="FormularioSurtidorAlta" class="mt-3">
+                <div class="mb-3">
+                    <label class="form-label">Nombre del surtidor:</label>
+                    <input type="text" name="nombre" id="nombre" class="form-control" required>
+                </div>
+                <button type="submit" class="btn btn-success w-100">Dar de alta</button>
+            </form>
+        </div>
+
+        <div class="card p-4 shadow-sm mt-4">
+            <h2 class="text-center">Dar de baja un surtidor</h2>
+            <form id="FormularioSurtidorBaja" class="mt-3">
+                <div class="mb-3">
+                    <label class="form-label">ID del surtidor:</label>
+                    <input type="number" name="idSurtidor" id="idSurtidor" class="form-control" required>
+                </div>
+                <button type="submit" class="btn btn-danger w-100">Dar de baja</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('FormularioRepostar').addEventListener('submit', function(event) {
+            event.preventDefault(); 
+            Repostar();
+        });
+        document.getElementById('FormularioSurtidorAlta').addEventListener('submit', function(event) {
+            event.preventDefault(); 
+            Alta();
+        });
+        document.getElementById('FormularioSurtidorBaja').addEventListener('submit', function(event) {
+            event.preventDefault(); 
+            baja();
+        });
+
+        function Repostar() {
+            var formData = new FormData(document.getElementById("FormularioRepostar"));
+            var fechaActual = new Date();
+            var fechaFormateada = fechaActual.getFullYear() + '-' + 
+                ('0' + (fechaActual.getMonth() + 1)).slice(-2) + '-' + 
+                ('0' + fechaActual.getDate()).slice(-2) + ' ' + 
+                ('0' + fechaActual.getHours()).slice(-2) + ':' + 
+                ('0' + fechaActual.getMinutes()).slice(-2) + ':' + 
+                ('0' + fechaActual.getSeconds()).slice(-2);
+            formData.append('fecha', fechaFormateada);
+
+            $.ajax({
+                url: "PHP_Repostar_combustible.php",
+                type: "POST",
+                dataType: "HTML",
+                data: formData,
+                cache: false,
+                contentType: false,
+                processData: false
+            }).done(function(datos) {
+                alert('Formulario enviado correctamente');
+            }).fail(function() {
+                alert('Hubo un error al enviar el formulario');
+            });
+        }
+
+        function Alta() {
+            var formDataAlta = new FormData(document.getElementById("FormularioSurtidorAlta"));
+            $.ajax({
+                url: "PHP-Alta_Surtidor.php",
+                type: "POST",
+                dataType: "HTML",
+                data: formDataAlta,
+                cache: false,
+                contentType: false,
+                processData: false
+            }).done(function(datos) {
+                alert('Surtidor dado de alta correctamente');
+            }).fail(function() {
+                alert('Hubo un error al dar de alta el surtidor');
+            });
+        }
+
+        function baja() {
+            var formDataBaja = new FormData(document.getElementById("FormularioSurtidorBaja"));
+            $.ajax({
+                url: "PHP-Baja_Surtidor.php",
+                type: "POST",
+                dataType: "HTML",
+                data: formDataBaja,
+                cache: false,
+                contentType: false,
+                processData: false
+            }).done(function(datos) {
+                alert('Surtidor dado de baja correctamente');
+            }).fail(function() {
+                alert('Hubo un error al dar de baja el surtidor');
+            });
+        }
+    </script>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
