@@ -28,11 +28,11 @@ Una pequeña aplicación web desarrollada en **PHP** y **MySQL** para gestionar 
 
 1. **Clona el repositorio:**
 2. **Configura la base de datos**
-  Abre phpMyAdmin o tu gestor de bases de datos MySQL.
+- Abre phpMyAdmin o tu gestor de bases de datos MySQL.
 
-  Crea una base de datos nueva.
+- Crea una base de datos nueva.
 
-  Importa el archivo prueba_DB.sql.
+- Importa el archivo prueba_DB.sql.
 
 3. Ajusta los datos de conexión en conexion.php
 
