@@ -8,9 +8,9 @@
 // -> esquema (shema) que quiero utilizar
 
 $servidor="127.0.0.1";
-$usuario="jorge";
-$contraseña="666666.j";
-$shema="prueba_redcom";
+$usuario="tu-usuario";
+$contraseña="tu-contraseña";
+$shema="tu-DB";
 
 // Usaremos esta variable para insertar cosas en consumir
 $tabla="consumir";
