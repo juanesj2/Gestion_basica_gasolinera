@@ -28,18 +28,13 @@ Una pequeña aplicación web desarrollada en **PHP** y **MySQL** para gestionar 
 
 1. **Clona el repositorio:**
 2. **Configura la base de datos**
-   Abre phpMyAdmin o tu gestor de bases de datos MySQL.
+  Abre phpMyAdmin o tu gestor de bases de datos MySQL.
 
   Crea una base de datos nueva.
 
   Importa el archivo prueba_DB.sql.
 
 3. Ajusta los datos de conexión en conexion.php
-
-4. Ejecuta el proyecto
-  Coloca el proyecto dentro de la carpeta htdocs (si usas XAMPP) o la raíz de tu servidor local, y abre el navegador en:
-
-  http://localhost/gasolinera-app/
 
 ```bash
 git clone https://github.com/tu-usuario/gasolinera-app.git
